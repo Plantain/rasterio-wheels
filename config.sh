@@ -251,8 +251,8 @@ function build_gdal {
         GEOS_CONFIG="--with-geos=${BUILD_PREFIX}/bin/geos-config"
     fi
 
-    fetch_unpack http://download.osgeo.org/gdal/${GDAL_VERSION}/gdal-${GDAL_VERSION}.tar.gz
-    (cd gdal-${GDAL_VERSION} \
+    git clone https://github.com/rouault/gdal.git -b fix_5343
+    (cd gdal \
         && (patch -u -p2 --force < ../patches/4646.diff || true) \
         && ./configure \
             --with-crypto=yes \
