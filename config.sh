@@ -253,7 +253,7 @@ function build_gdal {
 
     git clone https://github.com/rouault/gdal.git -b fix_5343
     (cd gdal \
-        && (patch -u -p2 --force < ../patches/4646.diff || true) \
+        && ./autogen.sh \
         && ./configure \
             --with-crypto=yes \
 	        --with-hide-internal-symbols \
