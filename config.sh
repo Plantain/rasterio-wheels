@@ -132,6 +132,7 @@ function get_cmake {
 
 function build_tiff {
     if [ -e tiff-stamp ]; then return; fi
+    build_libwebp
     build_zlib
     build_jpeg
     ensure_xz
