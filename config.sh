@@ -370,26 +370,6 @@ function pre_build {
 
 
 function run_tests {
-    unset GDAL_DATA
-    unset PROJ_LIB
-    if [ -n "$IS_OSX" ]; then
-        if [[ $MB_PYTHON_VERSION == "3.10" ]]; then return; fi
-        export PATH=$PATH:${BUILD_PREFIX}/bin
-        export LC_ALL=en_US.UTF-8
-        export LANG=en_US.UTF-8
-    else
-        export LC_ALL=C.UTF-8
-        export LANG=C.UTF-8
-        export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
-        sudo apt-get update
-        sudo apt-get install -y ca-certificates
-    fi
-    cp -R ../rasterio/tests ./tests
-    pip install shapely
-    PROJ_NETWORK=ON python -m pytest -vv tests -m "not gdalbin" -k "not test_ensure_env_decorator_sets_gdal_data_prefix and not test_tiled_dataset_blocksize_guard and not test_untiled_dataset_blocksize and not test_positional_calculation_byindex and not test_transform_geom_polygon and not test_reproject_error_propagation and not test_issue2353 and not test_info_azure_unsigned"
-    rio --version
-    rio env --formats
-    python ../test_fiona_issue383.py
 }
 
 
