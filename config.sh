@@ -148,7 +148,6 @@ function build_tiff {
 }
 
 function build_jxl {
-  apt-get -y install libbrotli-dev libgflags-dev
   JXL_TREEISH=main
   git clone https://github.com/libjxl/libjxl.git --recursive \
     && cd libjxl \
@@ -241,6 +240,14 @@ function build_zstd {
     touch zstd-stamp
 }
 
+function build_brotli {
+  git clone https://github.com/google/brotli.git
+  cd brotli
+  mkdir out && cd out
+  cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$BUILD_PREFIX ..
+  cmake --build . --config Release --target install
+}
+
 function build_gdal {
     if [ -e gdal-stamp ]; then return; fi
 
@@ -260,7 +267,7 @@ function build_gdal {
 
     CFLAGS="$CFLAGS -g -O2"
     CXXFLAGS="$CXXFLAGS -g -O2"
-
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_PREFIX/lib:$BUILD_PREFIX/lib64
     if [ -n "$IS_OSX" ]; then
         EXPAT_PREFIX=/usr
         GEOS_CONFIG="--without-geos"
