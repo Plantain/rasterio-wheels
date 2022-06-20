@@ -135,6 +135,7 @@ function build_tiff {
     build_libwebp
     build_zlib
     build_jpeg
+    build_jxl
     ensure_xz
     fetch_unpack https://download.osgeo.org/libtiff/tiff-${TIFF_VERSION}.tar.gz
     (cd tiff-${TIFF_VERSION} \
@@ -146,6 +147,19 @@ function build_tiff {
     touch tiff-stamp
 }
 
+function build_jxl {
+  JXL_TREEISH=main
+  git clone https://github.com/libjxl/libjxl.git --recursive \
+    && cd libjxl \
+    && git checkout ${JXL_TREEISH} \
+    && mkdir build \
+    && cd build \
+    && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF .. \
+    && make -j$(nproc) \
+    && make -j$(nproc) install \
+    && cd ../.. \
+    && rm -rf libjxl
+  }
 
 function build_openjpeg {
     if [ -e openjpeg-stamp ]; then return; fi
@@ -231,6 +245,7 @@ function build_gdal {
     build_curl
     build_jpeg
     build_libpng
+    build_jxl
     build_openjpeg
     build_jsonc
     build_sqlite
@@ -270,6 +285,7 @@ function build_gdal {
             --with-gif \
             --with-grib \
             --with-jpeg \
+            --with-jxl \
             --with-libiconv-prefix=/usr \
             --with-libjson-c=${BUILD_PREFIX} \
             --with-libtiff=${BUILD_PREFIX} \
