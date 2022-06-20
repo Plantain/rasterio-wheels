@@ -289,7 +289,7 @@ function build_gdal {
             --with-jxl \
             --with-libiconv-prefix=/usr \
             --with-libjson-c=${BUILD_PREFIX} \
-            --with-libtiff=${BUILD_PREFIX} \
+            --with-libtiff=internal \
             --with-libz=/usr \
             --with-netcdf=${BUILD_PREFIX} \
             --with-openjpeg \
@@ -368,6 +368,7 @@ function pre_build {
     suppress build_libpng
     suppress build_jpeg
     suppress build_openjpeg
+    suppress build_jxl
     suppress build_jsonc
     suppress build_sqlite
     build_proj
