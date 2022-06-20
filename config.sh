@@ -331,6 +331,8 @@ function build_gdal {
             --without-sfcgal \
             --without-xerces \
             --without-xml2 \
+        && cat config* \
+        && cat config.log \
         && make -j4 \
         && make install)
     if [ -n "$IS_OSX" ]; then
