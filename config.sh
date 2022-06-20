@@ -148,6 +148,7 @@ function build_tiff {
 }
 
 function build_jxl {
+  apt-get -y install libbrotli-dev libgflags-dev
   JXL_TREEISH=main
   git clone https://github.com/libjxl/libjxl.git --recursive \
     && cd libjxl \
