@@ -155,7 +155,7 @@ function build_jxl {
     && bash deps.sh \
     && mkdir build \
     && cd build \
-    && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF .. \
+    && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX=$BUILD_PREFIX -DJPEGXL_BUNDLE_GFLAGS=YES .. \
     && make -j$(nproc) \
     && make -j$(nproc) install \
     && cd ../.. \
