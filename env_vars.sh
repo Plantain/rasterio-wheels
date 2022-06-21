@@ -25,4 +25,3 @@ export PACKAGE_DATA=1
 export PROJ_LIB=/usr/local/share/proj
 export AUDITWHEEL_EXTRA_LIB_NAME_TAG=rasterio
 export SETUPTOOLS_USE_DISTUTILS=stdlib
-export JXL_LIBS=/usr/local/lib64/
