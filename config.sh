@@ -159,8 +159,6 @@ function build_jxl {
     && cmake --build . -- -j$(nproc) \
     && cmake --install . \
     && cd .. \
-    && cp -a third_party/brotli/libbrotli* /usr/local/lib64/ \
-    && cp -a third_party/brotli/libbrotli* /usr/local/lib64/pkgconfig/ \
     && cd third_party/brotli/ \
     && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$BUILD_PREFIX \
     && cmake --build . --config Release --target install \
