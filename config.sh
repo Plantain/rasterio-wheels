@@ -148,7 +148,6 @@ function build_tiff {
 }
 
 function build_jxl {
-  build_brotli
   JXL_TREEISH=main
   git clone https://github.com/libjxl/libjxl.git --recursive \
     && cd libjxl \
