@@ -241,15 +241,6 @@ function build_zstd {
     touch zstd-stamp
 }
 
-function build_brotli {
-  git clone https://github.com/google/brotli.git
-  cd brotli
-  mkdir out && cd out
-  cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$BUILD_PREFIX ..
-  cmake --build . --config Release --target install
-  cd ..
-}
-
 function build_gdal {
     if [ -e gdal-stamp ]; then return; fi
 
