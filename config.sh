@@ -155,9 +155,14 @@ function build_jxl {
     && bash deps.sh \
     && mkdir build \
     && cd build \
-    && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DJPEGXL_BUNDLE_GFLAGS=YES .. \
+    && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DJPEGXL_BUNDLE_GFLAGS=YES -DCMAKE_INSTALL_PREFIX=$BUILD_PREFIX .. \
     && cmake --build . -- -j$(nproc) \
     && cmake --install . \
+    && cp -a third_party/brotli/libbrotli* /usr/local/lib64/ \
+    && cp -a third_party/brotli/libbrotli* /usr/local/lib64/pkgconfig/ \
+    && cd third_party/brotli/ \
+    && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$BUILD_PREFIX \
+    && cmake --build . --config Release --target install \
     && cd ../.. \
     && rm -rf libjxl
   }
