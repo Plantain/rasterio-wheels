@@ -267,7 +267,9 @@ function build_gdal {
 
     CFLAGS="$CFLAGS -g -O2"
     CXXFLAGS="$CXXFLAGS -g -O2"
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_PREFIX/lib:$BUILD_PREFIX/lib64
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_PREFIX/lib:$BUILD_PREFIX/lib64:/usr/lib/x86_64-linux-gnu/
+    export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib64/pkgconfig/:/usr/lib/x86_64-linux-gnu/pkgconfig/
+
     if [ -n "$IS_OSX" ]; then
         EXPAT_PREFIX=/usr
         GEOS_CONFIG="--without-geos"
