@@ -383,7 +383,6 @@ function pre_build {
     suppress build_libpng
     suppress build_jpeg
     suppress build_openjpeg
-    suppress build_jxl
     suppress build_jsonc
     suppress build_sqlite
     build_proj
