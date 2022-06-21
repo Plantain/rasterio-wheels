@@ -161,7 +161,7 @@ function build_jxl {
     && cd third_party/brotli/ \
     && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$BUILD_PREFIX \
     && cmake --build . --config Release --target install \
-    && cd .. 
+    && cd ../../../
   }
 
 function build_openjpeg {
