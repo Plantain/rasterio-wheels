@@ -152,10 +152,6 @@ function build_jxl {
   git clone https://github.com/libjxl/libjxl.git --recursive \
     && cd libjxl \
     && git checkout ${JXL_TREEISH} \
-    #&& cd third_party/tiff-4.3.0/ \
-    #&& mv VERSION VERSION.txt \
-    #&& (patch -u --force < ../patches/libtiff-rename-VERSION.patch || true) \
-    #&& cd .. \
     && mkdir build \
     && cd build \
     && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DJPEGXL_BUNDLE_GFLAGS=YES -DCMAKE_INSTALL_PREFIX=$BUILD_PREFIX .. \
