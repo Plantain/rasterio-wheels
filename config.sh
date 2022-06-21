@@ -152,7 +152,6 @@ function build_jxl {
   git clone https://github.com/libjxl/libjxl.git --recursive \
     && cd libjxl \
     && git checkout ${JXL_TREEISH} \
-    && bash deps.sh \
     && mkdir build \
     && cd build \
     && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DJPEGXL_BUNDLE_GFLAGS=YES -DCMAKE_INSTALL_PREFIX=$BUILD_PREFIX .. \
