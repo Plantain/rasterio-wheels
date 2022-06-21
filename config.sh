@@ -42,11 +42,10 @@ function fetch_unpack {
 
 
 function build_geos {
-    CFLAGS="$CFLAGS -g -O2"
-    CXXFLAGS="$CXXFLAGS -g -O2"
+    CFLAGS="$CFLAGS -g -O3"
+    CXXFLAGS="$CXXFLAGS -g -O3"
     build_simple geos $GEOS_VERSION https://download.osgeo.org/geos tar.bz2
 }
-
 
 function build_jsonc {
     if [ -e jsonc-stamp ]; then return; fi
@@ -68,8 +67,8 @@ function build_jsonc {
 
 
 function build_proj {
-    CFLAGS="$CFLAGS -g -O2"
-    CXXFLAGS="$CXXFLAGS -g -O2"
+    CFLAGS="$CFLAGS -g -O3"
+    CXXFLAGS="$CXXFLAGS -g -O3"
     if [ -e proj-stamp ]; then return; fi
     build_sqlite
     fetch_unpack http://download.osgeo.org/proj/proj-${PROJ_VERSION}.tar.gz
@@ -212,8 +211,8 @@ function build_openssl {
 
 function build_curl {
     if [ -e curl-stamp ]; then return; fi
-    CFLAGS="$CFLAGS -g -O2"
-    CXXFLAGS="$CXXFLAGS -g -O2"
+    CFLAGS="$CFLAGS -g -O3"
+    CXXFLAGS="$CXXFLAGS -g -O3"
     build_nghttp2
     build_openssl
     local flags="--prefix=$BUILD_PREFIX --with-nghttp2=$BUILD_PREFIX --with-libz --with-ssl"
@@ -226,8 +225,8 @@ function build_curl {
 }
 
 function build_zstd {
-    CFLAGS="$CFLAGS -g -O2"
-    CXXFLAGS="$CXXFLAGS -g -O2"
+    CFLAGS="$CFLAGS -g -O3"
+    CXXFLAGS="$CXXFLAGS -g -O3"
     if [ -e zstd-stamp ]; then return; fi
     fetch_unpack https://github.com/facebook/zstd/archive/v${ZSTD_VERSION}.tar.gz
     if [ -n "$IS_OSX" ]; then
@@ -259,8 +258,8 @@ function build_gdal {
     build_zstd
     echo PWD
     echo $PWD
-    CFLAGS="$CFLAGS -g -O2"
-    CXXFLAGS="$CXXFLAGS -g -O2"
+    CFLAGS="$CFLAGS -g -O3"
+    CXXFLAGS="$CXXFLAGS -g -O3"
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_PREFIX/lib:$BUILD_PREFIX/lib64:/usr/lib/x86_64-linux-gnu/:$PWD/libjxl/build/third_party/brotli/
     export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib64/pkgconfig/:/usr/lib/x86_64-linux-gnu/pkgconfig/:/usr/lib64/pkgconfig/:/usr/lib/pkgconfig/:$PWD/libjxl/build/third_party/brotli/
 
