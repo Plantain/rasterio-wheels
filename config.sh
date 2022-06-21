@@ -135,7 +135,6 @@ function build_tiff {
     build_libwebp
     build_zlib
     build_jpeg
-    build_jxl
     ensure_xz
     fetch_unpack https://download.osgeo.org/libtiff/tiff-${TIFF_VERSION}.tar.gz
     (cd tiff-${TIFF_VERSION} \
