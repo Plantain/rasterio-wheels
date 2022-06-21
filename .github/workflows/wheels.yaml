@@ -43,6 +43,8 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: 3.9
+      - name: install deps
+        run: sudo apt-get -y install libbrotli-dev libgflags-dev
       - name: Build Wheel
         run: .github/workflows/build.sh
       - uses: actions/upload-artifact@v2
