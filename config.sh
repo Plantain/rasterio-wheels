@@ -156,8 +156,8 @@ function build_jxl {
     && mkdir build \
     && cd build \
     && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DJPEGXL_BUNDLE_GFLAGS=YES .. \
-    && make -j$(nproc) \
-    && make -j$(nproc) install \
+    && cmake --build . -- -j$(nproc) \
+    && cmake --install . \
     && cd ../.. \
     && rm -rf libjxl
   }
@@ -246,6 +246,7 @@ function build_brotli {
   mkdir out && cd out
   cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$BUILD_PREFIX ..
   cmake --build . --config Release --target install
+  cd ..
 }
 
 function build_gdal {
@@ -264,11 +265,12 @@ function build_gdal {
     build_hdf5
     build_netcdf
     build_zstd
-
+    echo PWD
+    echo $PWD
     CFLAGS="$CFLAGS -g -O2"
     CXXFLAGS="$CXXFLAGS -g -O2"
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_PREFIX/lib:$BUILD_PREFIX/lib64:/usr/lib/x86_64-linux-gnu/
-    export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib64/pkgconfig/:/usr/lib/x86_64-linux-gnu/pkgconfig/
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_PREFIX/lib:$BUILD_PREFIX/lib64:/usr/lib/x86_64-linux-gnu/:$PWD/libjxl/build/third_party/brotli/
+    export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib64/pkgconfig/:/usr/lib/x86_64-linux-gnu/pkgconfig/:/usr/lib64/pkgconfig/:/usr/lib/pkgconfig/:$PWD/libjxl/build/third_party/brotli/
 
     if [ -n "$IS_OSX" ]; then
         EXPAT_PREFIX=/usr
