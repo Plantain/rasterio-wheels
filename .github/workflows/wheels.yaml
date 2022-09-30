@@ -44,7 +44,7 @@ jobs:
         with:
           python-version: 3.9
       - name: install deps
-        run: sudo apt-get -y install libbrotli-dev libgflags-dev libbrotli1
+        run: sudo apt-get -y install libbrotli-dev libgflags-dev libbrotli1 libatomic-ops-dev
       - name: Build Wheel
         run: .github/workflows/build.sh
       - uses: actions/upload-artifact@v2
