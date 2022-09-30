@@ -274,7 +274,7 @@ function build_gdal {
         GEOS_CONFIG="--with-geos=${BUILD_PREFIX}/bin/geos-config"
     fi
 
-    git clone https://github.com/OSGeo/gdal.git 
+    git clone https://github.com/OSGeo/gdal.git -b v3.5.2
     (cd gdal \
         && ./autogen.sh \
         && ./configure \
