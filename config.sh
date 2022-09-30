@@ -146,12 +146,11 @@ function build_tiff {
 }
 
 function build_jxl {
-  yum update
-  yum -y install libatomic
   JXL_TREEISH=main
   git clone https://github.com/libjxl/libjxl.git --recursive \
     && cd libjxl \
     && git checkout ${JXL_TREEISH} \
+    && pushd third_party/highway && git checkout 0.17.0 && popd \
     && mkdir build \
     && cd build \
     && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DJPEGXL_BUNDLE_GFLAGS=YES -DCMAKE_INSTALL_PREFIX=$BUILD_PREFIX .. \
