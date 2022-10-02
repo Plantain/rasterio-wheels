@@ -42,8 +42,8 @@ function fetch_unpack {
 
 
 function build_geos {
-    CFLAGS="$CFLAGS -g -O3"
-    CXXFLAGS="$CXXFLAGS -g -O3"
+    CFLAGS="$CFLAGS -g -Os"
+    CXXFLAGS="$CXXFLAGS -g -Os"
     build_simple geos $GEOS_VERSION https://download.osgeo.org/geos tar.bz2
 }
 
@@ -67,8 +67,8 @@ function build_jsonc {
 
 
 function build_proj {
-    CFLAGS="$CFLAGS -g -O3"
-    CXXFLAGS="$CXXFLAGS -g -O3"
+    CFLAGS="$CFLAGS -g -Os"
+    CXXFLAGS="$CXXFLAGS -g -Os"
     if [ -e proj-stamp ]; then return; fi
     build_sqlite
     fetch_unpack http://download.osgeo.org/proj/proj-${PROJ_VERSION}.tar.gz
@@ -214,8 +214,8 @@ function build_openssl {
 
 function build_curl {
     if [ -e curl-stamp ]; then return; fi
-    CFLAGS="$CFLAGS -g -O3"
-    CXXFLAGS="$CXXFLAGS -g -O3"
+    CFLAGS="$CFLAGS -g -Os"
+    CXXFLAGS="$CXXFLAGS -g -Os"
     build_nghttp2
     build_openssl
     local flags="--prefix=$BUILD_PREFIX --with-nghttp2=$BUILD_PREFIX --with-libz --with-ssl"
@@ -228,8 +228,8 @@ function build_curl {
 }
 
 function build_zstd {
-    CFLAGS="$CFLAGS -g -O3"
-    CXXFLAGS="$CXXFLAGS -g -O3"
+    CFLAGS="$CFLAGS -g -Os"
+    CXXFLAGS="$CXXFLAGS -g -Os"
     if [ -e zstd-stamp ]; then return; fi
     fetch_unpack https://github.com/facebook/zstd/archive/v${ZSTD_VERSION}.tar.gz
     if [ -n "$IS_OSX" ]; then
@@ -252,17 +252,17 @@ function build_gdal {
     build_jxl
     build_openjpeg
     build_jsonc
-    build_sqlite
+    #build_sqlite
     build_proj
     build_expat
     build_geos
-    build_hdf5
-    build_netcdf
-    build_zstd
+    #build_hdf5
+    #build_netcdf
+    #build_zstd
     echo PWD
     echo $PWD
-    CFLAGS="$CFLAGS -g -O3"
-    CXXFLAGS="$CXXFLAGS -g -O3"
+    CFLAGS="$CFLAGS -g -Os"
+    CXXFLAGS="$CXXFLAGS -g -Os"
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_PREFIX/lib:$BUILD_PREFIX/lib64:/usr/lib/x86_64-linux-gnu/:$PWD/libjxl/build/third_party/brotli/
     export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib64/pkgconfig/:/usr/lib/x86_64-linux-gnu/pkgconfig/:/usr/lib64/pkgconfig/:/usr/lib/pkgconfig/:$PWD/libjxl/build/third_party/brotli/
 
@@ -280,7 +280,6 @@ function build_gdal {
         && ./configure \
             --with-crypto=yes \
 	        --with-hide-internal-symbols \
-	        --with-webp=${BUILD_PREFIX} \
             --disable-debug \
             --disable-static \
 	        --disable-driver-elastic \
@@ -297,13 +296,10 @@ function build_gdal {
             --with-libjson-c=${BUILD_PREFIX} \
             --with-libtiff=internal \
             --with-libz=/usr \
-            --with-netcdf=${BUILD_PREFIX} \
             --with-openjpeg \
             --with-pam \
             --with-png \
             --with-proj=${BUILD_PREFIX} \
-            --with-sqlite3=${BUILD_PREFIX} \
-            --with-zstd=${BUILD_PREFIX} \
             --with-threads \
             --without-bsb \
             --without-cfitsio \
@@ -382,9 +378,9 @@ function pre_build {
     suppress build_expat
     suppress build_libwebp
     suppress build_geos
-    suppress build_hdf5
-    suppress build_netcdf
-    suppress build_zstd
+    #suppress build_hdf5
+    #suppress build_netcdf
+    #suppress build_zstd
 
     if [ -n "$IS_OSX" ]; then
         export LDFLAGS="${LDFLAGS} -Wl,-rpath,${BUILD_PREFIX}/lib"
