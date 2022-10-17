@@ -17,14 +17,8 @@ jobs:
       matrix:
         os: [ "ubuntu-20.04" ]
         python: [ "3.8", "3.9", "3.10" ]
-        platform: [ "x86_64" ]
-        macos-target: [ "10.10" ]
-        exclude:
-          - os: "macos-latest"
-            platform: "i686"
+        platform: [ "x86_64", "arm64" ]
         include:
-          - os: "macos-latest"
-            os-name: "osx"
           - os: "ubuntu-20.04"
             os-name: "focal"
     env:
@@ -35,7 +29,6 @@ jobs:
       BUILD_DEPENDS: "oldest-supported-numpy cython==0.29.28 wheel==0.34.2"
       TEST_DEPENDS: "oldest-supported-numpy attrs==21.4.0 pytest==6.2.5 click==8.0.3 mock boto3 packaging hypothesis==4.38.1 wheel==0.34.2"
       TRAVIS_OS_NAME: ${{ matrix.os-name }}
-      MACOSX_DEPLOYMENT_TARGET: ${{ matrix.macos-target }}
     steps:
       - uses: actions/checkout@v2
         with:
