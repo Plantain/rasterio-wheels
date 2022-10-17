@@ -17,7 +17,7 @@ jobs:
       matrix:
         os: [ "ubuntu-20.04" ]
         python: [ "3.8", "3.9", "3.10" ]
-        platform: [ "x86_64", "arm64" ]
+        platform: [ "x86_64", "aarch64" ]
         include:
           - os: "ubuntu-20.04"
             os-name: "focal"
